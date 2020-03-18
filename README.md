@@ -1,10 +1,11 @@
-# The Midcourse Project | Team 1
+# Newsroom Project | Team 1
 ### Authors
 [Emma]()
 [Karro]()
 [Pierre]()
 [Philip]()
 [Kayla]()
+[Thomas]()
 ### Workflow Ground Rules
 * Two people outside of that pair programming team should independently review each PR before we merge
     * spend more than 5 min
@@ -50,7 +51,7 @@
     * don't leave people hanging in slack, always respond with an emoji or text, and try to keep conversations in threads where applicable to keep slack clean and easy to read through
  - 
 ## Built with
-**Front End:** React v. | CSS  
+**Front End:** React v.16.13.0 | CSS  
 **Back End:** Ruby 2.6.3 | Rails 6.0.2 
 **Testing framework:** Cypress  
 **Deployed at:** [Netlify]() and [Heroku]().
