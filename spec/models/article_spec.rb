@@ -1,5 +1,3 @@
-require 'rails_helper'
-
 RSpec.describe Article, type: :model do
   describe 'Articles has db columns' do
     it {is_expected.to have_db_column :id}
