@@ -1,0 +1,3 @@
+Article.create title: 'Article Title', lead: 'At some point there will be something the read in the lead', content: 'Article content will go here for the user to read.'
+Article.create title: 'Coronavirus in Sweden', lead: 'We are all in quarentine', content: 'We are all mad here'
+Article.create title: 'Thomas Got a New Car', lead: 'He bought it to comfort himself', content: 'And now he wants a third car, that he found on Blocket.'
