@@ -7,4 +7,9 @@ class Api::ArticlesController < ApplicationController
       render json: { error: "No articles found" }, status: 422
     end
   end
+
+  def show 
+    @article = Article.find(params[:id])
+    render json: @article.first, serializer: ArticleShowSerializer
+  end
 end
