@@ -2,7 +2,7 @@
 
 RSpec.describe Api::ArticlesController, type: :request do
   describe 'GET /article/1 successfully' do
-    let!(:articles) { create(:article, title: 'Article Title', lead: 'At some point there will be something the read in the lead', content: 'Article content will go here for the user to read.') }
+    let!(:articles) { create(:article, title: 'Article Title', lead: 'At some point there will be something the read in the lead', content: 'Article content will go here for the user to read.', category: 'latest_news') }
     before do
       get "/api/articles/#{articles.id}"
     end
@@ -21,6 +21,10 @@ RSpec.describe Api::ArticlesController, type: :request do
 
     it 'should return content articles' do
       expect(response_json['article']['content']).to eq 'Article content will go here for the user to read.'
+    end
+
+    it 'should return article category' do
+      expect(response_json['article']['category']).to eq 'latest_news'
     end
   end
 end
