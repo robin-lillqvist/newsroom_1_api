@@ -12,7 +12,6 @@ RSpec.describe Api::ArticlesController, type: :request do
     end
 
     it 'should return title articles' do
-      binding.pry
       expect(response_json['article']['title']).to eq 'Article Title'
     end
 
