@@ -17,6 +17,8 @@ class Api::ArticlesController < ApplicationController
     article = Article.create(article_params)
     if article.persisted?
       render json: {message: 'Your article was successfully created'}
+    else
+      render json: { error: 'Something went wrong' }, status: 422
     end
   end
 

@@ -23,4 +23,27 @@ let(:headers) { { HTTP_ACCEPT:'application/json' } }
       expect(response_json['message']).to eq 'Your article was successfully created'
     end
   end
+
+  describe 'with valid params' do
+    before do
+      post '/api/articles',
+      params: {
+        article: {
+          title:"",
+          lead: "",
+          content: "",
+          category: "latest_news"
+        }
+      },
+      headers: headers
+    end
+
+    it 'returns 422 response' do
+      expect(response.status).to eq 422
+    end
+
+    it 'returns an unsuccessful message' do
+      expect(response_json['error']).to eq 'Something went wrong'
+    end
+  end
 end
