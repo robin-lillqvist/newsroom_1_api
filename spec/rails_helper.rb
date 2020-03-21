@@ -1,4 +1,4 @@
-require  'coveralls'
+require 'coveralls'
 Coveralls.wear_merged!('rails')
 
 ENV['RAILS_ENV'] ||= 'test'
