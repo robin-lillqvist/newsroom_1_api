@@ -3,5 +3,6 @@ FactoryBot.define do
    title {'This is an article'} 
    lead {'This is an article lead'}
    content {'This is article content'}
+   category {'latest_news'}
   end
 end
