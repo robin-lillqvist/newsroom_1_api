@@ -2,9 +2,9 @@
 
 RSpec.describe Api::ArticlesController, type: :request do
   describe 'GET /article/1 successfully' do
-    let!(:articles) { create(:article, title: 'Article Title', lead: 'At some point there will be something the read in the lead', content: 'Article content will go here for the user to read.', category: 'latest_news') }
+    let!(:article) { create(:article, title: 'Article Title', lead: 'At some point there will be something the read in the lead', content: 'Article content will go here for the user to read.') }
     before do
-      get "/api/articles/#{articles.id}"
+      get "/api/articles/#{article.id}"
     end
 
     it 'should return a 200 response' do
@@ -12,6 +12,7 @@ RSpec.describe Api::ArticlesController, type: :request do
     end
 
     it 'should return title articles' do
+      binding.pry
       expect(response_json['article']['title']).to eq 'Article Title'
     end
 
