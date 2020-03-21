@@ -1,18 +1,18 @@
 RSpec.describe 'POST /articles', type: :request do
-let(:headers) { { HTTP_ACCEPT:'application/json' } }
+  let(:headers) { { HTTP_ACCEPT: 'application/json' } }
 
   describe 'with valid params' do
     before do
       post '/api/articles',
-      params: {
-        article: {
-          title:"New Car",
-          lead: "It's a Berlingo",
-          content: "Oliver hates it",
-          category: "latest_news"
-        }
-      },
-      headers: headers
+        params: {
+          article: {
+            title: 'New Car',
+            lead: "It's a Berlingo",
+            content: 'Oliver hates it',
+            category: 'latest_news'
+          }
+        },
+        headers: headers
     end
 
     it 'returns 200 response' do
@@ -27,15 +27,15 @@ let(:headers) { { HTTP_ACCEPT:'application/json' } }
   describe 'with valid params' do
     before do
       post '/api/articles',
-      params: {
-        article: {
-          title:"",
-          lead: "",
-          content: "",
-          category: "latest_news"
-        }
-      },
-      headers: headers
+        params: {
+          article: {
+            title: '',
+            lead: '',
+            content: '',
+            category: 'latest_news'
+          }
+        },
+        headers: headers
     end
 
     it 'returns 422 response' do
