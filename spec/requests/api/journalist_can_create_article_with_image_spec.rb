@@ -35,8 +35,7 @@ RSpec.describe "POST /articles", type: :request do
 
     it 'article has image attached to it' do
       article = Article.where(title: response.request.params['article']['title'])
-      expect(article.image.attached?).to eq true
-      binding.pry
+      expect(article.first.image.attached?).to eq true
     end
   end
   describe 'with valid params' do
