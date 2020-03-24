@@ -6,7 +6,7 @@ RSpec.describe 'POST /articles', type: :request do
       type: 'application/jpg',
       encoder: 'name=new_iphone.jpg:base64',
       data: 'KFKJSDHFWE78723JEWKH247YDAHSD&JSDFJKDJKSHFJGDSKJHKFGS/JSDFGJSH34BHGJH3',
-      extension: 'jpg',
+      extension: 'jpg'
     }
   end
 
@@ -19,7 +19,7 @@ RSpec.describe 'POST /articles', type: :request do
             lead: "It's a Berlingo",
             content: 'Oliver hates it',
             category: 'latest_news',
-            image: image,
+            image: image
           },
         },
         headers: headers
