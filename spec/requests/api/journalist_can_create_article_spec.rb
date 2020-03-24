@@ -1,6 +1,15 @@
 RSpec.describe 'POST /articles', type: :request do
   let(:headers) { { HTTP_ACCEPT: 'application/json' } }
 
+  let(:image) do
+    {
+      type: 'application/jpg',
+      encoder: 'name=new_iphone.jpg:base64',
+      data: 'KFKJSDHFWE78723JEWKH247YDAHSD&JSDFJKDJKSHFJGDSKJHKFGS/JSDFGJSH34BHGJH3',
+      extension: 'jpg',
+    }
+  end
+
   describe 'with valid params' do
     before do
       post '/api/articles',
@@ -9,8 +18,9 @@ RSpec.describe 'POST /articles', type: :request do
             title: 'New Car',
             lead: "It's a Berlingo",
             content: 'Oliver hates it',
-            category: 'latest_news'
-          }
+            category: 'latest_news',
+            image: image,
+          },
         },
         headers: headers
     end
@@ -22,6 +32,11 @@ RSpec.describe 'POST /articles', type: :request do
     it 'returns a success message' do
       expect(response_json['message']).to eq 'Your article was successfully created'
     end
+
+    it 'article has image attached to it' do
+      article = Article.where(title: response.request.params['article']['title'])
+      expect(article.first.image.attached?).to eq true
+    end
   end
 
   describe 'with valid params' do
@@ -32,7 +47,8 @@ RSpec.describe 'POST /articles', type: :request do
             title: '',
             lead: '',
             content: '',
-            category: 'latest_news'
+            category: 'latest_news',
+            image: ''
           }
         },
         headers: headers
