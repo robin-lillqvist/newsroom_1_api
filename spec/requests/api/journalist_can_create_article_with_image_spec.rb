@@ -4,7 +4,7 @@ RSpec.describe "POST /articles", type: :request do
   let(:image) do
     {
       type: 'application/jpg',
-      encoder: 'name=new_iphone.jpg',
+      encoder: 'name=new_iphone.jpg:base64',
       data: 'KFKJSDHFWE78723JEWKH247YDAHSD&JSDFJKDJKSHFJGDSKJHKFGS/JSDFGJSH34BHGJH3',
       extension: 'jpg'
     }
