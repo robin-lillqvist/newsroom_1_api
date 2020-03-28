@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(version: 2020_03_28_163747) do
     t.string "lead"
     t.text "content"
     t.integer "category", default: 0
-    t.boolean "premium"
+    t.boolean "premium", default: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -67,7 +67,7 @@ ActiveRecord::Schema.define(version: 2020_03_28_163747) do
     t.string "last_sign_in_ip"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.boolean "premium_user", default: false
+    t.boolean "premium_user"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
