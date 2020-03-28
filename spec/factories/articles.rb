@@ -4,5 +4,6 @@ FactoryBot.define do
     lead {'This is an article lead'}
     content {'This is article content'}
     category {'latest_news'}
+    premium { true }
   end
 end
