@@ -1,7 +1,7 @@
 class ArticleShowSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
   
-  attributes :id, :title, :lead, :content, :category, :image
+  attributes :id, :title, :lead, :content, :category, :image, :premium 
 
   def image
     return nil unless object.image.attached?

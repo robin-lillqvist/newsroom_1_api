@@ -19,7 +19,8 @@ RSpec.describe 'POST /articles', type: :request do
             lead: "It's a Berlingo",
             content: 'Oliver hates it',
             category: 'latest_news',
-            image: image
+            image: image,
+            premium: "true"
           },
         },
         headers: headers
