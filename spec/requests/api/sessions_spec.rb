@@ -29,6 +29,10 @@ RSpec.describe "POST /api/auth/sign_in", type: :request do
     it "returns the expected response" do
       expect(response_json).to eq expected_response
     end
+
+    it 'returns user email' do
+      expect(response_json['data']['email']).to eq user.email
+    end
   end
 
   describe "with invalid password" do
