@@ -30,4 +30,10 @@ RSpec.describe User, type: :model do
       end
     end
   end
+
+  describe "Factory" do
+    it "Should have valid factory" do
+      expect(create(:user)).to be_valid
+    end
+  end
 end
