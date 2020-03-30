@@ -10,6 +10,7 @@ gem 'active_model_serializers'
 gem 'rack-cors', require: 'rack/cors'
 gem 'aws-sdk-s3'
 gem 'devise_token_auth'
+gem 'stripe-ruby-mock'
 
 group :development, :test do
   gem 'rspec-rails'
