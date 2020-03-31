@@ -11,7 +11,7 @@ Stripe.plan :platinum_plan do |plan|
   plan.amount = 1000000
 
   # currency to use for the plan (default 'usd')
-  plan.currency = 'SEK'
+  plan.currency = 'usd'
 
   # interval must be either 'day', 'week', 'month' or 'year'
   plan.interval = 'month'

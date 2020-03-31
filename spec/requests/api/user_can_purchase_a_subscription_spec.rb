@@ -1,35 +1,37 @@
-# Rspec.describe Api::SubscriptionsController, type: :request do
-
-#     before do
-#         post '/api/subscriptions', params: (stripeToken: '123434', email: 'user@mail.com')
-
-#     end
-
-#     it "creates a subscription for a specific user" do
-
-#     end
-
-# end
-
 require "stripe_mock"
 
 RSpec.describe "User can buy subscription" do
-  let(:stripe_helper) { StripeMock.create_test_helper }
+  let!(:stripe_helper) { StripeMock.create_test_helper }
   before(:each) { StripeMock.start }
   after(:each) { StripeMock.stop }
-  let(:user) { create(:user) }
-  let(:user_credentials) { user.create_new_auth_token }
-  let(:headers) { { HTTP_ACCEPT: "application/json" }.merge!(user_credentials) }
-
+  let!(:user) { create(:user) }
+  let!(:user_credentials) { user.create_new_auth_token }
+  let!(:headers) { { HTTP_ACCEPT: "application/json" }.merge!(user_credentials) }
+  let!(:card_token){StripeMock.generate_card_token}
+  let!(:invalid_token){'1234'}
+  let(:product) { stripe_helper.create_product }
+  let!(:plan){stripe_helper.create_plan(
+    product: product.id, 
+    id: 'platinum_plan', 
+    amount: 1000000, 
+    currency: 'usd',
+    interval: 'month',
+    interval_count: 12,
+    trial_period_days: 30,
+    name: 'Berlingo News Premium Platinum Plan' 
+    )
+  }
+    
   describe "with valid stripe token" do
     describe "successfully" do
       before do
         post "/api/subscriptions",
              params: {
-               stripeToken: stripe_helper.generate_card_token,
+               stripeToken: card_token,
+               email: user.email
              },
              headers: headers
-        user.reload
+             user.reload
       end
 
       it "with valid stripe token recieve successful response" do
@@ -37,7 +39,8 @@ RSpec.describe "User can buy subscription" do
       end
 
       it "receives success message" do
-        expect(response_json).to eq JSON.parse({ status: "paid" }.to_json)
+        expect(response_json).to eq ""
+        # expect(response_json["message"]).to eq 'Transaction cleared'
       end
 
       it "has their status updated to premium" do
@@ -51,13 +54,13 @@ RSpec.describe "User can buy subscription" do
       before do
         post "/api/subscriptions",
              params: {
-               stripeToken: 123456789,
+               stripeToken: invalid_token,
              },
              headers: headers
       end
 
-      it "recieves message 'Transaction rejected, token invalid'" do
-        expect(response_json["message"]).to eq "Transaction rejected, token invalid"
+      it "recieves message 'No Stripe token detected'" do
+        expect(response_json["message"]).to eq "No Stripe token detected"
       end
 
       it "has their status remain unchanged" do
@@ -72,7 +75,7 @@ RSpec.describe "User can buy subscription" do
       end
 
       it "recieves 'No Stripe token detected'" do
-        expect(response_json["message"]).to eq "Transaction rejected, token invalid"
+        expect(response_json["message"]).to eq "No Stripe token detected"
       end
     end
 
