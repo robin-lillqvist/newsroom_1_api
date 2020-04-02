@@ -21,6 +21,6 @@ RSpec.configure do |config|
   config.include ResponseJSON
 end
 
-# FactoryBot::SyntaxRunner.class_eval do
-#   include ActionDispatch::TestProcess
-# end 
+FactoryBot::SyntaxRunner.class_eval do
+  include ActionDispatch::TestProcess
+end 
