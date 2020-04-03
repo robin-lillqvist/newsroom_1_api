@@ -1,5 +1,14 @@
 RSpec.describe 'POST /articles', type: :request do
-  let(:headers) { { HTTP_ACCEPT: 'application/json' } }
+  let(:journalist) { create(:user, role: 'journalist') }
+  let(:journalist_credentials) { journalist.create_new_auth_token }
+  let(:journalist_headers) do
+    { HTTP_ACCEPT: 'application/json' }.merge!(journalist_credentials)
+  end
+  let(:user) { create(:user, role: 'user') }
+  let(:user_credentials) { user.create_new_auth_token }
+  let(:user_headers) do
+    { HTTP_ACCEPT: "application/json" }.merge!(user_credentials)
+  end
 
   let(:image) do
     {
@@ -23,7 +32,7 @@ RSpec.describe 'POST /articles', type: :request do
             premium: "true"
           },
         },
-        headers: headers
+        headers: journalist_headers
     end
 
     it 'returns 200 response' do
@@ -40,19 +49,44 @@ RSpec.describe 'POST /articles', type: :request do
     end
   end
 
+  describe 'users cannot create articles' do
+    before do
+      post '/api/articles',
+        params: {
+          article: {
+            title: 'New Car',
+            lead: "It's a Berlingo",
+            content: 'Oliver hates it',
+            category: 'latest_news',
+            image: image,
+            premium: "true"
+          },
+        },
+        headers: user_headers
+    end
+
+    it 'returns 401 status' do
+      expect(response.status).to eq 401
+    end
+
+    it 'returns an error message' do
+      expect(response_json['error']).to eq 'You must be a journalist to create an article'
+    end
+  end
+
   describe 'with valid params' do
     before do
       post '/api/articles',
         params: {
           article: {
-            title: '',
+            title: '', 
             lead: '',
             content: '',
             category: 'latest_news',
             image: ''
           }
         },
-        headers: headers
+        headers: journalist_headers
     end
 
     it 'returns 422 response' do

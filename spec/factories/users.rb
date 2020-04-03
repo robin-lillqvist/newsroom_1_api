@@ -4,5 +4,9 @@ FactoryBot.define do
     password { "password" }
     password_confirmation { "password" }
     premium_user { false }
+    role { 'user' }
+    factory :journalist do
+      role { 'journalist' } 
+    end
   end
 end

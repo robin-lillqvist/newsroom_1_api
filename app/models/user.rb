@@ -3,5 +3,6 @@ extend Devise::Models
   devise :database_authenticatable, :registerable,
     :recoverable, :rememberable, :trackable, :validatable
   include DeviseTokenAuth::Concerns::User
-  enum role: [:user]
+  validates_presence_of :role
+  enum role: [:user, :journalist]
 end
