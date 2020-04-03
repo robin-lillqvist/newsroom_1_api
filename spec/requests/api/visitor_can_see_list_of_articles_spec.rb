@@ -1,6 +1,6 @@
 RSpec.describe Api::ArticlesController, type: :request do
   describe 'GET /article successfully' do
-    let!(:articles) { 3.times { create(:article) } }
+    let!(:articles) { 3.times { create(:article, :with_image) } }
     before do
       get '/api/articles'
     end

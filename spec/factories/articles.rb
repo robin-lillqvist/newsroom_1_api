@@ -5,5 +5,8 @@ FactoryBot.define do
     content {'This is article content'}
     category {'latest_news'}
     premium { true }
+    trait :with_image do
+      image { fixture_file_upload(Rails.root.join('spec', 'support', 'assets', 'test-image.png'), 'image/png') }
+    end
   end
 end
