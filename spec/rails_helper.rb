@@ -20,3 +20,7 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   config.include ResponseJSON
 end
+
+FactoryBot::SyntaxRunner.class_eval do
+  include ActionDispatch::TestProcess
+end 
