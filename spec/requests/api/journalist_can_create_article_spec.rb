@@ -1,6 +1,8 @@
 RSpec.describe 'POST /articles', type: :request do
-  let(:headers) { { HTTP_ACCEPT: 'application/json' } }
-
+  let(:user) { create(:user, role: 'journalist') }
+  let(:credentials) { user.create_new_auth_token }
+  let(:headers) { { HTTP_ACCEPT: "application/json" }.merge!(credentials) }
+   
   let(:image) do
     {
       type: 'application/jpg',
