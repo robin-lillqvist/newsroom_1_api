@@ -26,5 +26,6 @@ lead: "As people continue to avoid leaving home as much as possible, new creativ
 content: "We are in a time of Rennasaince for the home chef as people continue to be reticient to leave their home unless absolutely necessary. People are finally finding uses for the mostly empty bags of frozen vegetables, that last half cup of flour, and only having enough pasta for half a meal. They are taking the normally ignored food items that never seem to make their way to a plate, and creating wonderfully diverse, if sometimes inedible, creations that are delighting the world. Stay tuned for an exclusive of some of these wonderfully unexpected and bizarre meals.",
 premium: true
 
-User.create email: 'user@mail.com', password: 'password', premium_user: false
-User.create email: 'premium@mail.com', password: 'password', premium_user: true
+User.create email: 'user@mail.com', password: 'password', premium_user: false, role: 'user'
+User.create email: 'premium@mail.com', password: 'password', premium_user: true, role: 'user'
+User.create email: 'journalist@mail.com', password: 'password', premium_user: true, role: 'journalist'
