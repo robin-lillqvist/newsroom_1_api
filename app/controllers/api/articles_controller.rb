@@ -1,4 +1,6 @@
 class Api::ArticlesController < ApplicationController
+  before_action :authenticate_user!, only: %i[create]
+
   def index
     articles = Article.all
     if articles.any?
@@ -14,11 +16,16 @@ class Api::ArticlesController < ApplicationController
   end
 
   def create
+    if current_user.role == 'journalist'
     article = Article.create(article_params)
     if article.persisted? && attach_image(article)      
       render json: { message: 'Your article was successfully created' }
     else
       render json: { error: 'Something went wrong' }, status: 422
+    end
+    else
+      render json: { error: 'You must be a journalist to create an article'},
+      status: 401
     end
   end
 

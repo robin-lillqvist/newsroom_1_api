@@ -67,7 +67,7 @@ ActiveRecord::Schema.define(version: 2020_04_03_075915) do
     t.string "last_sign_in_ip"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.boolean "premium_user"
+    t.boolean "premium_user", default: false
     t.integer "role", default: 0
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true

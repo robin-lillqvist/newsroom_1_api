@@ -2,10 +2,11 @@
 
 RSpec.describe Api::ArticlesController, type: :request do
   describe 'GET /article/1 successfully' do
-    let!(:article) { create(:article, title: 'Article Title', lead: 'At some point there will be something the read in the lead', content: 'Article content will go here for the user to read.') }
-    before do
-      get "/api/articles/#{article.id}"
-    end
+    let!(:article) { create(:article, :with_image, title: 'Article Title', lead: 'At some point there will be something the read in the lead', content: 'Article content will go here for the user to read.', premium: true) }
+
+     before do  
+       get "/api/articles/#{Article.last.id}"
+     end
 
     it 'should return a 200 response' do
       expect(response).to have_http_status 200
@@ -25,6 +26,10 @@ RSpec.describe Api::ArticlesController, type: :request do
 
     it 'should return article category' do
       expect(response_json['article']['category']).to eq 'latest_news'
+    end
+
+    it 'should return article premium' do
+      expect(response_json['article']['premium']).to eq true
     end
   end
 end
