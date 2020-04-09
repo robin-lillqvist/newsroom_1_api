@@ -1,10 +1,10 @@
 # Newsroom Project | Team 1
 ### Authors
-[Emma]()
-[Karro]()
 [Pierre]()
-[Philip]()
 [Kayla]()
+[Robin]()
+[Blake]()
+[Daniel]()
 [Thomas]()
 ### Workflow Ground Rules
 * Two people outside of that pair programming team should independently review each PR before we merge
